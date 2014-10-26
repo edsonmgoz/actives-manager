@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="<?php echo Conectar::ruta();?>">Active</a></h1>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php
+          if(isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador')
+          {
+            include("menu_admin.phtml");
+          }
+          elseif (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado')
+          {
+            include("menu_encargado.phtml");
+          }
+          elseif (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='personal')
+          {
+            include("menu_personal.phtml");
+          }
+          else
+          {
+            include("menu_principal.phtml");
+          }
+        ?>
+      </nav>
+      <!-- end of navigation -->
+      <br>
+      <div class="contenedor">
+      	<h3>Activos registrados actualmente</h3>
+      	<br>
+	    <?php
+	    if(isset($_GET["m"]))
+	    {
+
+		    switch($_GET["m"])
+		    {
+		      case '1';
+		      ?>
+		            <h3 style="color:green"> Activo eliminado correctamente.</h3>
+		          <?php
+		      break;
+
+		      case '2';
+		      ?>
+		            <h3 style="color:red"> Activo no pudo ser eliminado, intente nuevamente.</h3>
+		          <?php
+		      break;
+
+          case '3';
+          ?>
+            <h3 style="color:red"> Activo no puede ser eliminado debido a que tiene transacciones realizadas.</h3>
+                  <?php
+          break;
+    		}
+    	}
+    	?>
+    	<br>
+       	<div id="contenedor_tabla">
+        <div class="barra_deslizante_tabla">
+        <?php
+        if(empty($activo))
+        {
+        ?>
+            <h2 style="color:white;"> Ningun activo encontrado </h2>
+        <?php
+        }
+        else
+        {
+                ?>
+                <table align="center" width="965">
+
+                <tr style="background-color:#808080; color:#FFFFFF; font-weight:bold">
+
+                <td valign="middle" align="center" width="55" height="30"  >
+                Código</td>
+
+                <td valign="middle" align="center" width="200" height="30" >
+                Nombre activo</td>
+
+                <td valign="middle" align="center" width="150" height="30" >
+                Fecha</td>
+
+                <td valign="middle" align="center" width="100" height="30">
+                Detalle activo</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Cantidad (U)</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Tipo</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Precio (Bs)</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Ubicación</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Foto</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Vida útil<br>(Restante en años)</td>
+
+                <td valign="middle" align="center" width="50" height="30" style="color: #f1c40f">
+                Depreciación gestión (Bs) </td>
+
+                <td valign="middle" align="center" width="100" height="30">
+                Encargado</td>
+
+                <?php
+                if ((isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador') or (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado'))
+                {
+                ?>
+                <td valign="middle" align="center" width="36">
+                Editar</td>
+
+                <td valign="middle" align="center" width="41">
+                Eliminar</td>
+                <?php } ?>
+                </tr>
+                <?php
+                for($i=0;$i<count($activo);$i++)
+                {
+                ?>
+                    <tr id="<?php echo "tr_$i";?>" style="background-color:#f0f0f0" onMouseMove="tr('<?php echo "tr_$i";?>','#cccccc');" onMouseOut="tr('<?php echo "tr_$i";?>','#f0f0f0');">
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["codigo_activo"];
+                    ?></td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["nombre_activo"];
+                    ?></td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["fecha_ingreso"];
+                    ?></td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["detalle_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["cantidad_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["tipo_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["precio_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center" width="71">
+                      <a href="<?php echo Conectar::ruta()?>ubicaciones/<?php echo $activo[$i]["ubicacion_activo"];?>" target="_blank"><img src="<?php echo Conectar::ruta()?>ubicaciones/<?php echo $activo[$i]["ubicacion_activo"];?>" width="100" height="100" /></a>
+                    </td>
+
+                    <td valign="middle" align="center" width="71">
+                      <a href="<?php echo Conectar::ruta()?>activos/<?php echo $activo[$i]["foto_activo"];?>" target="_blank"><img src="<?php echo Conectar::ruta()?>activos/<?php echo $activo[$i]["foto_activo"];?>" width="100" height="100" /></a>
+                    </td>
+
+                    <!-- Cálculo de años de vida útil restante -->
+                    <?php
+                    $dia_mes_actual = date("d-m")."-2000";
+                    $anio_actual=date("Y");
+
+                    $f_ingreso = $activo[$i]["fecha_ingreso"];
+                    $arreglo_f = explode("-", $f_ingreso);
+                    $dia_mes_ingreso = ($arreglo_f['0']."-".$arreglo_f['1'])."-2000";
+                    $anio_ingreso = $arreglo_f['2'];
+                    $anio_ingreso_ufv = $arreglo_f['2'];
+
+                    $vida_util_ingreso = $activo[$i]["vida_util"];
+
+
+                    if (strtotime($dia_mes_actual) >= strtotime($dia_mes_ingreso))
+                    {
+
+                      $anio_restante = $anio_actual - $anio_ingreso;
+                      $vida_util_actual = $vida_util_ingreso - $anio_restante;
+
+                      if ($vida_util_actual <= 0)
+                      {
+                        ?>
+                        <td valign="middle" align="center" style="background-color: #e74c3c; color: #000000">
+                          <strong>0</strong>
+                        </td>
+                        <?php
+                      }
+                      else
+                      {
+                      ?>
+                      <td valign="middle" align="center">
+                        <?php
+                        echo "<strong>".$vida_util_actual."</strong>";
+                        ?>
+                      </td>
+                      <?php
+                      }
+                    }
+                    else
+                    {
+
+                      $anio_restante = $anio_actual - $anio_ingreso;
+                      $vida_util_actual = ($vida_util_ingreso - $anio_restante) + 1;
+
+                      if ($vida_util_actual <= 0)
+                      {
+                        ?>
+                        <td valign="middle" align="center" style="background-color: #e74c3c; color: #000000">
+                          <strong>0</strong>
+                        </td>
+                        <?php
+                      }
+                      else
+                      {
+                      ?>
+                      <td valign="middle" align="center">
+                        <?php
+                        echo "<strong>".$vida_util_actual."</strong>";
+                        ?>
+                      </td>
+                      <?php
+                      }
+                    }
+                    ?>
+                    <!--  -->
+
+                    <!-- Calculando depreciacion GESTION-->
+                    <td valign="middle" align="center" style="background-color: #f1c40f">
+                    <?php
+                      $dep2_final= $activo[$i]["precio_activo"];
+                      for ($l=0; $l <= $anio_restante; $l++)
+                      {
+                        $fecha_inicio = $anio_ingreso_ufv."-01-01";
+                        $fecha_fin = $anio_ingreso_ufv."-12-31";
+                        for ($m=0; $m < count($get_ufv); $m++)
+                        {
+                          if (isset($get_ufv[$m]["fecha_ufv"]) and $get_ufv[$m]["fecha_ufv"] == $fecha_inicio)
+                          {
+                            $ufv_inicio = $get_ufv[$m]["valor_ufv"];
+                          }
+
+                          if (isset($get_ufv[$m]["fecha_ufv"]) and $get_ufv[$m]["fecha_ufv"] == $fecha_fin)
+                          {
+                            $ufv_fin = $get_ufv[$m]["valor_ufv"];
+                          }
+                        }
+
+                        $precio_act = $dep2_final;
+                        $ufv_tot = ($ufv_fin / $ufv_inicio) - 1;
+                        $dep = $ufv_tot * $precio_act;
+                        $porcentaje = $activo[$i]["porcentaje_cat"];
+                        $dep2 = $dep + $precio_act;
+
+
+                        $dep2_final = round($dep2 * 100) / 100; //Redondeando 2 decimales
+
+
+                        $anio_ingreso_ufv ++;
+
+                      }
+                      $dep3 = $dep2_final * $porcentaje;
+                      $dep3_final = round($dep3 * 100) / 100;
+                      echo $dep3_final;
+
+                    // Calculando depreciacion con el porcentaje
+                    /*
+                    $porcentaje = $activo[$i]["porcentaje_cat"];
+                    $precio_act = $activo[$i]["precio_activo"];
+                    $resultado = $precio_act * $porcentaje;
+                    //echo $resultado;
+                    if (strtotime($dia_mes_actual) >= strtotime($dia_mes_ingreso))
+                    {
+                      if ($vida_util_actual >= $vida_util_ingreso)
+                      {
+                        echo "0";
+                      }
+                      else
+                      {
+                        $res_vida = $vida_util_ingreso - $vida_util_actual;
+                        $res_total = $res_vida*$resultado;
+
+                        if ($res_total >= $precio_act)
+                        {
+                          echo $precio_act;
+                        }
+                        else
+                        {
+                          echo $res_total;
+                        }
+                      }
+                    }
+                    else
+                    {
+                      if ($vida_util_actual >= $vida_util_ingreso)
+                      {
+                        echo "0";
+                      }
+                      else
+                      {
+                        $res_vida = $vida_util_ingreso - $vida_util_actual;
+                        $res_total = $res_vida*$resultado;
+
+                        if ($res_total >= $precio_act)
+                        {
+                          if ($vida_util_actual <= 0)
+                          {
+                            echo $precio_act;
+                          }
+                          else
+                          {
+                            echo $precio_act - $resultado;
+                          }
+
+                        }
+                        else
+                        {
+                          echo $res_total;
+                        }
+                      }
+                    }
+                    */
+                    ?>
+
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $activo[$i]["nombre_usuario"];
+                    ?>
+                    </td>
+                    <?php
+                    if ((isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador') or (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado'))
+                    {
+                    ?>
+                    <!--campo editar-->
+                  <td valign="middle" align="center" width="50">
+                        <a href="<?php echo Conectar::ruta();?>?accion=edit_activo&id_activo=<?php echo $activo[$i]["id_activo"];?>" title="Editar <?php echo $activo[$i]["nombre_activo"];?>"><img src="<?php echo Conectar::ruta();?>images/editar.png" border="0" width="32" height="32" /></a>
+                    </td>
+
+                    <!--Campo eliminar-->
+                    <td valign="middle" align="center" width="50">
+                        <a href="#" title="Eliminar <?php echo $activo[$i]["nombre_activo"];?> " onclick="eliminar('<?php echo Conectar::ruta();?>?accion=delete_activo&id_activo=<?php echo $activo[$i]["id_activo"];?>')"><img src="<?php echo Conectar::ruta();?>images/eliminar.png" border="0" width="32" height="32" /></a>
+                    </td>
+                    <?php } ?>
+                </tr>
+                <?php
+                }
+                ?>
+                </table>
+        <?php
+        }
+        ?>
+        </div><!--Fin class barra_deslizante_tabla-->
+        </div> <!--fin contenedor_tabla-->
+
+
+      </div>
+      <!-- footer -->
+      <div id="footer">
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

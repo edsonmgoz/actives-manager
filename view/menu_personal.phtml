@@ -1,0 +1,32 @@
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>menu_source/styles.css" type="text/css" />
+</head>
+<body>
+	<div id='cssmenu'>
+	<ul>
+	   <li><a href="<?php echo Conectar::ruta();?>?accion=personal" title="Inicio"><span>Inicio</span></a></li>
+<!-- 	   <li class='has-sub'><a href='#'><span>Usuarios</span></a>
+	      <ul>
+	         <li><a href="<?php // echo Conectar::ruta();?>?accion=add_user" title="Crear usuario"><span>Crear usuario</span></a></li>
+	         <li class='last'><a href='#'><span>Registro de usuarios</span></a></li>
+	      </ul>
+	   </li> -->
+	   <li class='has-sub'><a href='#'><span>Activos</span></a>
+	      <ul>
+	         <li><a href='<?php echo Conectar::ruta();?>?accion=view_activo' title="Registro de activos"><span>Registro de activos</span></a></li>
+	         <li><a href='<?php echo Conectar::ruta();?>?accion=view_miactivo' title="Mis activos"><span>Mis activos</span></a></li>
+	         <li><a href='<?php echo Conectar::ruta();?>?accion=problem_report' title="Reportar problema"><span>Reportar problema</span></a></li>
+	      </ul>
+	   </li>
+     <li class='has-sub'><a href='#'><span>Mantenimiento</span></a>
+        <ul>
+           <li><a href="<?php echo Conectar::ruta();?>?accion=my_maintenance" title="Mis mantenimientos"><span>Mis mantenimientos</span></a></li>
+        </ul>
+     </li>
+	   <li class='last'><a href="<?php echo Conectar::ruta();?>?accion=salir" title="Cerrar Sesi&oacute;n"><span>Cerrar Sesi&oacute;n</span></a></li>
+	</ul>
+	</div>
+</body>
+</html>

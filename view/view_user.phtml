@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+
+  <style type="text/css">
+    <!--
+    .Estilo1 {font-family:"Arial"; font-size:13px; color: green;}
+    .Estilo2 {font-family:"Arial"; font-size:13px; color: red;}
+    -->
+  </style>
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="#">Active</a></h1>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php include("menu_admin.phtml"); ?>
+      </nav>
+      <!-- end of navigation -->
+      <br>
+      <div class="contenedor">
+      	<h3>Usuarios registrados actualmente</h3>
+      	<br>
+	    <?php
+	    if(isset($_GET["m"]))
+	    {
+
+		    switch($_GET["m"])
+		    {
+		      case '1';
+		      ?>
+		            <h3 style="color:green"> Usuario eliminado correctamente.</h3>
+		          <?php
+		      break;
+
+		      case '2';
+		      ?>
+		            <h3 style="color:red"> Usuario no pudo ser eliminado, intente nuevamente.</h3>
+		          <?php
+		      break;
+
+              case '3';
+              ?>
+                    <h3 style="color:red"> Usuario no puede ser eliminado debido a que tiene transacciones realizadas.</h3>
+                  <?php
+              break;
+    		}
+    	}
+    	?>
+    	<br>
+       	<div id="contenedor_tabla">
+        <div class="barra_deslizante_tabla">
+        <?php
+        if(empty($usuario))
+        {
+        ?>
+            <h2 style="color:white;"> Ningun usuario encontrado </h2>
+        <?php
+        }
+        else
+        {
+            $inc=1;
+            $sql=0;
+            do {
+                ?>
+
+                <table align="center" width="965">
+
+                <tr style="background-color:#808080; color:#FFFFFF; font-weight:bold">
+
+                <td valign="middle" align="center" width="55" height="30"  >
+                Nro</td>
+
+                <td valign="middle" align="center" width="200" height="30" >
+                Nombre Completo</td>
+
+                <td valign="middle" align="center" width="150" height="30" >
+                Login</td>
+
+                <td valign="middle" align="center" width="100" height="30">
+                Fecha</td>
+
+<!--                 <td valign="middle" align="center" width="50" height="30">
+                Archivos Subidos</td> -->
+
+                <td valign="middle" align="center" width="50" height="30">
+                Rol</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Foto</td>
+
+                <td valign="middle" align="center" width="100" height="30">
+                Estado</td>
+
+                <td valign="middle" align="center" width="150" height="30">
+                Cambiar estado</td>
+
+                <td valign="middle" align="center" width="36">
+                Editar</td>
+
+                <td valign="middle" align="center" width="36">
+                Cambiar Pass</td>
+
+                <td valign="middle" align="center" width="41">
+                Eliminar</td>
+                </tr>
+                <?php
+                for($i=0;$i<count($usuario);$i++)
+                {
+                ?>
+                    <tr id="<?php echo "tr_$i";?>" style="background-color:#f0f0f0" onMouseMove="tr('<?php echo "tr_$i";?>','#cccccc');" onMouseOut="tr('<?php echo "tr_$i";?>','#f0f0f0');">
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                    echo $inc++;
+                    ?></td>
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                    echo $usuario[$i]["nombre_usuario"];
+                    ?></td>
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                    echo $usuario[$i]["login"];
+                    ?></td>
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                    echo $usuario[$i]["fecha_usuario"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                    echo $usuario[$i]["tipo_usuario"];
+                    ?>
+                    </td>
+
+
+                    <td valign="middle" align="center" width="71">
+						<a href="<?php echo Conectar::ruta()?>pics/<?php echo $usuario[$i]["foto"];?>" target="_blank"><img src="<?php echo Conectar::ruta()?>pics/<?php echo $usuario[$i]["foto"];?>" title="<?php echo $usuario[$i]["nombre_usuario"];?>" width="100" height="100" /></a>
+                    </td>
+
+
+<!--                     <td valign="middle" align="center" height="30">
+                    <a href="<?php // echo Conectar::ruta();?>?accion=archivosubidos&id_usuario=<?php // echo $usuario[$i]["id_usuario"];?>" title="Archivos subidos del usuario <?php // echo $usuario[$i]["nombre_usuario"];?>"><img src="<?php // echo Conectar::ruta();?>images/verarchivos.png" border="0" width="32" height="32" /></a>
+                    </td> -->
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                    $est=$usuario[$i]['estado'];
+                        if($est == "habilitado")
+                        {
+                            ?>
+                            <span class="Estilo1"><strong>
+                            <?php
+                            echo "Habilitado";
+                            ?>
+                            </strong></span> <?php
+                        }
+                        elseif($est == "deshabilitado")
+                        {
+                            ?>
+                            <span class="Estilo2"><strong>
+                            <?php
+                            echo "Deshabilitado";
+                            ?>
+                            </strong></span> <?php
+                        }
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center" height="30">
+                    <?php
+                        if($est == "habilitado")
+                        {
+                            $nuevo_estado='deshabilitado';
+                            ?>
+                            <a href="#" title="Deshabilitar al usuario <?php echo $usuario[$i]["nombre_usuario"];?>" onclick="deshabilitar('<?php echo Conectar::ruta();?>?accion=cambiarestado&id_usuario=<?php echo $usuario[$i]["id_usuario"];?>&bandera=<?php echo $nuevo_estado ?>')">Deshabilitar Usuario</a>
+                            <?php
+                        }
+                        elseif($est == "deshabilitado")
+                        {
+                            $nuevo_estado='habilitado';
+                            ?>
+                            <a href="#" title="Habilitar al usuario <?php echo $usuario[$i]["nombre_usuario"];?>" onclick="habilitar('<?php echo Conectar::ruta();?>?accion=cambiarestado&id_usuario=<?php echo $usuario[$i]["id_usuario"];?>&bandera=<?php echo $nuevo_estado ?>')">Habilitar Usuario</a>
+                            <?php
+                        }
+                    ?>
+                   	</td>
+
+                    <!--campo editar-->
+	                <td valign="middle" align="center" width="50">
+                        <a href="<?php echo Conectar::ruta();?>?accion=edit_user&id_usuario=<?php echo $usuario[$i]["id_usuario"];?>" title="Editar <?php echo $usuario[$i]["nombre_usuario"];?>"><img src="<?php echo Conectar::ruta();?>images/editar.png" border="0" width="32" height="32" /></a>
+                    </td>
+
+                    <!--campo cambiar pass-->
+	                <td valign="middle" align="center" width="50">
+                        <a href="<?php echo Conectar::ruta();?>?accion=cambiar_pass&id_usuario=<?php echo $usuario[$i]["id_usuario"];?>" title="Cambiar password del usuario <?php echo $usuario[$i]["nombre_usuario"];?>"><img src="<?php echo Conectar::ruta();?>images/cambiar_pass.png" border="0" width="32" height="32" /></a>
+                    </td>
+
+                    <!--Campo eliminar-->
+                    <td valign="middle" align="center" width="50">
+                        <a href="#" title="Eliminar <?php echo $usuario[$i]["nombre_usuario"];?> " onclick="eliminar('<?php echo Conectar::ruta();?>?accion=delete_user&id_usuario=<?php echo $usuario[$i]["id_usuario"];?>')"><img src="<?php echo Conectar::ruta();?>images/eliminar.png" border="0" width="32" height="32" /></a>
+                    </td>
+                </tr>
+                <?php
+                }
+                ?>
+                </table>
+            <?php
+            } while($sql);//Fin do-while
+        }
+        ?>
+        </div><!--Fin class barra_deslizante_tabla-->
+        </div> <!--fin contenedor_tabla-->
+
+
+      </div>
+      <!-- footer -->
+      <div id="footer">
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

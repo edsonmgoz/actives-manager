@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!--     <div style="background-color:#FFFFFF;"><a href="<?php // echo Conectar::ruta();?>?accion=genera">Generar UFV's</a></div> -->
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="<?php echo Conectar::ruta();?>">Active</a></h1>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php include("menu_admin.phtml"); ?>
+      </nav>
+      <!-- end of navigation -->
+      <br>
+      <div class="contenedor">
+	    <?php
+		if(isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador')
+		{
+			echo "..::<strong style='font-size:16px'> Bienvenid@ Administrador: ".$usu[0]["nombre_usuario"]."</strong>::..";
+		}
+        ?>
+        <br><br>
+        <div id="sidebar">
+            <br>
+            <?php include("perfilgral.phtml"); ?>
+        </div>
+        <div id="intro_usuario">
+            <?php include("intro_admin.phtml"); ?>
+        </div>
+      </div>
+
+
+
+
+
+      <!-- footer -->
+      <div id="footer">
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

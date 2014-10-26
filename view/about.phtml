@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="#">Active</a></h1>
+        <div id="sesion"><a href="<?php echo Conectar::ruta(); ?>?accion=logueo">Iniciar Sesión</a></div>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php include("menu_principal.phtml"); ?>
+      </nav>
+      <!-- end of navigation -->
+
+      <div class="contenedor">
+        <br>
+        <h3>Acerca de Actives Manager</h3>
+        <br>
+        <br>
+
+        El Sistema De Gestion de Activos Fijos "ACTIVES MANAGER", fue desarrollado con el
+        proposito de administrar, controlar y monitorizar todo los Activos Fijos que se encuentran dentro el laboratorio INF-SIS I de la carrera Ingenieria de Sistemas de la Facultad de Ciencias y Tecnologia de la Universidad Mayor de San Simon.
+        Desarrollado por :
+        <br>
+        <br>
+                          - Gutierrez Soria Eddy<br>
+                          - Muruchi Galindo Israel<br>
+                          - Valdivia Aranibar Ismael Ramiro<br>
+                          - Morales Machicado Dany Daniel<br>
+        <br>
+
+              Cochabamba - Bolivia         <br>                                  2014
+
+      </div><!-- end contenedor -->
+
+      <!-- footer -->
+      <div id="footer">
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

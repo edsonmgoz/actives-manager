@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=0" />
+  <title>Bienvenido a ActiveManager.com</title>
+  <link rel="shortcut icon" type="image/x-icon" href="css/imagenes/icono arriba.jpg" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" media="all" />
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,900,800,700,600,500,300,200,100' rel='stylesheet' type='text/css'>
+
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery.carouFredSel-5.5.0-packed.js" type="text/javascript"></script>
+  <script src="<?php echo Conectar::ruta(); ?>js/functions.js" type="text/javascript"></script>
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+  <script src="<?php echo Conectar::ruta(); ?>js/md5.js" type="text/javascript"></script>
+  
+  <style type="text/css">
+  #sesion{
+    text-align: right;
+    font-size: 16px;
+    margin-right: 8px;
+  }
+  </style>
+</head>
+<body>
+     <h1>
+
+ <audio src="css/audio/fondo.mp3"autoplay controls>
+</audio>
+
+     </h1>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="#">Active</a></h1>
+
+        <!-- search
+        <div class="search">
+          <form action="" method="post">
+            <input type="text" class="field" value="keywords here ..." title="keywords here ..." />
+            <input type="submit" class="search-btn" value="" />
+            <div class="cl">&nbsp;</div>
+          </form>
+        </div>
+         end of search -->
+        <div class="cl">&nbsp;</div>
+        <div id="sesion"><a href="<?php echo Conectar::ruta(); ?>?accion=logueo">Iniciar Sesi&oacute;n</a></div>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <a href="#" class="nav-btn">Inicio<span></span></a>
+        <ul>
+          <li class="active"><a href="<?php echo Conectar::ruta(); ?>?accion=index">Inicio</a></li>
+          <li><a href="formularios/formulario1.html">Registro</a></li>
+          <li><a href="#">Activos</a></li>
+          <li><a href="#">Acerca De</a></li>
+
+        </ul>
+        <div class="cl">&nbsp;</div>
+      </nav>
+      <!-- end of navigation -->
+      <!-- slider-holder -->
+      <div class="slider-holder">
+	  
+	  
+        <form name="form" action="" method="post">
+        <?php
+        if(isset($_GET["m"]))
+        {
+            switch($_GET["m"])
+            {
+                case '1':
+                ?>
+                <h2 style="color:red;">Los datos están vacíos</h2>
+                <?php
+                break;
+
+                case '2':
+                ?>
+                <h2 style="color:red;">Los datos son incorrectos, intente de nuevo porfavor ! </h2>
+                <?php
+                break;
+
+                case '3':
+                ?>
+                <h2 style="color:green;">Usted ha cerrado su sesión exitosamente </h2>
+                <?php
+                break;
+
+                case '4':
+                ?>
+                <h2 style="color:red;"> Debe Loguearse primero para acceder a este contenido. </h2>
+                <?php
+                break;
+
+                case '5':
+                ?>
+                <h2 style="color:red;"> Usted esta deshabilitado de ISSUE. </h2>
+                <?php
+                break;
+            }
+        }
+        ?>
+        <table align="center" width="400">
+        <br /><br />
+        <tr>
+        <td valign="middle" align="center" colspan="2" width="400" style="font-size:24px">
+        <strong>Registrar Activo</strong>
+        <br /><br />
+        </td>
+        </tr>
+	
+        <tr>
+        <td valign="middle" align="right" width="200">
+        <b>Nombre:</b>
+        </td>
+        <td valign="middle" align="left" width="200">
+        <input type="text" name="nombre_activo" placeholder="Ingrese su nombre" autofocus/>
+        </td>
+        </tr>
+
+        <tr>
+        <td valign="middle" align="right" width="200">
+        <b>C&oacute;digo:</b>
+        </td>
+        <td valign="middle" align="left" width="200">
+        <input type="password" name="codigo" />
+        </td>
+        </tr>
+
+        <tr>
+        <td valign="middle" align="right" width="200">
+        <b>Fecha:</b>
+        </td>
+        <td valign="middle" align="left" width="200">
+        <input type="datetime" name="fechahora">
+        </td>
+        </tr>		
+		
+		
+		
+        <tr>
+        <td valign="middle" align="right" width="200">
+        <b>Color de activo:</b>
+        </td>
+        <td valign="middle" align="left" width="200">
+        <input type="color" name="color">
+        </td>
+        </tr>			
+		
+	
+		
+        <tr>
+        <td valign="middle" align="right" width="200">
+        <b>buscar activo:</b>
+        </td>
+        <td valign="middle" align="left" width="200">
+        <input type="search" name="busqueda">	
+        </td>
+        </tr>				
+		
+        <tr>
+        <td valign="middle" align="center" colspan="2" width="400">
+        <input type="hidden" name="grabar" value="si" />
+        <input type="button" value="Entrar" title="Entrar" onclick="validar_logueo();" />
+        <br>
+        </td>
+        </tr>
+        </table>
+        </form>
+
+		
+		
+
+      <!-- end of main -->
+      <div class="cl">&nbsp;</div>
+
+      <!-- footer -->
+      <div id="footer">
+        <div class="footer-nav">
+           <!-- <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Projects</a></li>
+            <li><a href="#">Solutions</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Contacts</a></li>
+          </ul>  -->
+          <div class="cl">&nbsp;</div>
+        </div>
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a  href="ACTIVES MANAGER" target="_blank">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

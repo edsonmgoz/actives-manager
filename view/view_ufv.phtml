@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="<?php echo Conectar::ruta();?>">Active</a></h1>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php
+          if(isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador')
+          {
+            include("menu_admin.phtml");
+          }
+          elseif (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado')
+          {
+            include("menu_encargado.phtml");
+          }
+          elseif (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='personal')
+          {
+            include("menu_personal.phtml");
+          }
+          else
+          {
+            include("menu_principal.phtml");
+          }
+        ?>
+      </nav>
+      <!-- end of navigation -->
+      <br>
+      <div class="contenedor">
+      	<img src="<?php echo Conectar::ruta(); ?>images/bnb.png">
+      	<br>
+      	<h3>AÑO <?php echo date("Y"); ?></h3>
+      	<br>
+      	<h3>UNIDAD DE FOMENTO DE VIVIENDA (UFV)</h3>
+    	<br>
+       	<div id="contenedor_tabla">
+        <div class="barra_deslizante_tabla">
+        <?php
+        if(empty($verifica))
+        {
+        ?>
+            <h2 style="color:white;"> Ningun UFV encontrado </h2>
+        <?php
+        }
+        else
+        {
+        	$inc = 1;
+        	$contador = 0;
+        	do {
+                ?>
+                <table align="center" width="965">
+
+                <tr style="background-color:#808080; color:#FFFFFF; font-weight:bold">
+
+                <td valign="middle" align="center" width="74" height="30"  >
+                DIAS</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                ENERO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                FEBRERO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                MARZO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                ABRIL</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                MAYO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                JUNIO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                JULIO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                AGOSTO</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                SEPTIEMBRE</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                OCTUBRE</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                NOVIEMBRE</td>
+
+                <td valign="middle" align="center" width="74" height="30" >
+                DICIEMBRE</td>
+                </tr>
+                <?php
+                for($i=0;$i<31;$i++)
+                {
+                ?>
+                    <tr id="<?php echo "tr_$i";?>" style="background-color:#f0f0f0" onMouseMove="tr('<?php echo "tr_$i";?>','#cccccc');" onMouseOut="tr('<?php echo "tr_$i";?>','#f0f0f0');">
+
+                    <td valign="middle" align="center">
+                    	<strong>
+                    	<?php echo $inc++; ?>
+                    	</strong>
+					</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($enero[$i]["valor_ufv"]))
+	                    {
+	                    	echo $enero[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($febrero[$i]["valor_ufv"]))
+	                    {
+	                    	echo $febrero[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($marzo[$i]["valor_ufv"]))
+	                    {
+	                    	echo $marzo[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($abril[$i]["valor_ufv"]))
+	                    {
+	                    	echo $abril[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($mayo[$i]["valor_ufv"]))
+	                    {
+	                    	echo $mayo[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($junio[$i]["valor_ufv"]))
+	                    {
+	                    	echo $junio[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($julio[$i]["valor_ufv"]))
+	                    {
+	                    	echo $julio[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($agosto[$i]["valor_ufv"]))
+	                    {
+	                    	echo $agosto[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($septiembre[$i]["valor_ufv"]))
+	                    {
+	                    	echo $septiembre[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($octubre[$i]["valor_ufv"]))
+	                    {
+	                    	echo $octubre[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($noviembre[$i]["valor_ufv"]))
+	                    {
+	                    	echo $noviembre[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                    <td valign="middle" align="center">
+	                    <?php
+	                    if (isset($diciembre[$i]["valor_ufv"]))
+	                    {
+	                    	echo $diciembre[$i]["valor_ufv"];
+	                    }
+	                    else
+	                    {
+	                    	echo "";
+						}
+	                    ?>
+                	</td>
+
+                </tr>
+                <?php
+                }
+                ?>
+                </table>
+        <?php
+        	} while ($contador);
+        }
+        ?>
+        </div><!--Fin class barra_deslizante_tabla-->
+        </div> <!--fin contenedor_tabla-->
+
+
+      </div>
+      <br><br><br><br><br>
+      <!-- footer -->
+      <div id="footer">
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

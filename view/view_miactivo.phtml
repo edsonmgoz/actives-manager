@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="<?php echo Conectar::ruta();?>">Active</a></h1>
+      </header>
+      <!-- end of header -->
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php
+          if(isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador')
+          {
+            include("menu_admin.phtml");
+          }
+          elseif (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado')
+          {
+            include("menu_encargado.phtml");
+          }
+          elseif (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='personal')
+          {
+            include("menu_personal.phtml");
+          }
+          else
+          {
+            include("menu_principal.phtml");
+          }
+        ?>
+      </nav>
+      <!-- end of navigation -->
+      <br>
+      <div class="contenedor">
+      	<h3>Activos del usuario <?php echo $usu[0]["nombre_usuario"] ?></h3>
+      	<br>
+    	  <br>
+       	<div id="contenedor_tabla">
+        <div class="barra_deslizante_tabla">
+        <?php
+        if(empty($miactivo))
+        {
+        ?>
+            <h2 style="color:white;"> Ningun activo encontrado </h2>
+        <?php
+        }
+        else
+        {
+                ?>
+                <table align="center" width="965">
+
+                <tr style="background-color:#808080; color:#FFFFFF; font-weight:bold">
+
+                <td valign="middle" align="center" width="55" height="30"  >
+                Código</td>
+
+                <td valign="middle" align="center" width="200" height="30" >
+                Nombre activo</td>
+
+                <td valign="middle" align="center" width="150" height="30" >
+                Fecha</td>
+
+                <td valign="middle" align="center" width="100" height="30">
+                Detalle activo</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Cantidad (U)</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Tipo</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Precio (Bs)</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Ubicación</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Foto</td>
+
+                <td valign="middle" align="center" width="50" height="30">
+                Vida útil<br>(Restante en años)</td>
+
+                <?php
+                if ((isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador') or (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado'))
+                {
+                ?>
+                <td valign="middle" align="center" width="36">
+                Editar</td>
+
+                <td valign="middle" align="center" width="41">
+                Eliminar</td>
+                <?php } ?>
+                </tr>
+                <?php
+                for($i=0;$i<count($miactivo);$i++)
+                {
+                ?>
+                    <tr id="<?php echo "tr_$i";?>" style="background-color:#f0f0f0" onMouseMove="tr('<?php echo "tr_$i";?>','#cccccc');" onMouseOut="tr('<?php echo "tr_$i";?>','#f0f0f0');">
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["codigo_activo"];
+                    ?></td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["nombre_activo"];
+                    ?></td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["fecha_ingreso"];
+                    ?></td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["detalle_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["cantidad_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["tipo_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center">
+                    <?php
+                    echo $miactivo[$i]["precio_activo"];
+                    ?>
+                    </td>
+
+                    <td valign="middle" align="center" width="71">
+                      <a href="<?php echo Conectar::ruta()?>ubicaciones/<?php echo $miactivo[$i]["ubicacion_activo"];?>" target="_blank"><img src="<?php echo Conectar::ruta()?>ubicaciones/<?php echo $miactivo[$i]["ubicacion_activo"];?>" width="100" height="100" /></a>
+                    </td>
+
+                    <td valign="middle" align="center" width="71">
+                      <a href="<?php echo Conectar::ruta()?>activos/<?php echo $miactivo[$i]["foto_activo"];?>" target="_blank"><img src="<?php echo Conectar::ruta()?>activos/<?php echo $miactivo[$i]["foto_activo"];?>" width="100" height="100" /></a>
+                    </td>
+
+                    <!-- Cálculo de años de vida útil restante -->
+                    <?php
+                    $dia_mes_actual = date("d-m")."-2000";
+                    $anio_actual=date("Y");
+
+                    $f_ingreso = $miactivo[$i]["fecha_ingreso"];
+                    $arreglo_f = explode("-", $f_ingreso);
+                    $dia_mes_ingreso = ($arreglo_f['0']."-".$arreglo_f['1'])."-2000";
+                    $anio_ingreso = $arreglo_f['2'];
+
+                    $vida_util_ingreso = $miactivo[$i]["vida_util"];
+
+
+                    if (strtotime($dia_mes_actual) >= strtotime($dia_mes_ingreso))
+                    {
+
+                      $anio_restante = $anio_actual - $anio_ingreso;
+                      $vida_util_actual = $vida_util_ingreso - $anio_restante;
+
+                      if ($vida_util_actual <= 0)
+                      {
+                        ?>
+                        <td valign="middle" align="center" style="background-color: #e74c3c; color: #000000">
+                          <strong>0</strong>
+                        </td>
+                        <?php
+                      }
+                      else
+                      {
+                      ?>
+                      <td valign="middle" align="center">
+                        <?php
+                        echo "<strong>".$vida_util_actual."</strong>";
+                        ?>
+                      </td>
+                      <?php
+                      }
+                    }
+                    else
+                    {
+
+                      $anio_restante = $anio_actual - $anio_ingreso;
+                      $vida_util_actual = ($vida_util_ingreso - $anio_restante) + 1;
+
+                      if ($vida_util_actual <= 0)
+                      {
+                        ?>
+                        <td valign="middle" align="center" style="background-color: #e74c3c; color: #000000">
+                          <strong>0</strong>
+                        </td>
+                        <?php
+                      }
+                      else
+                      {
+                      ?>
+                      <td valign="middle" align="center">
+                        <?php
+                        echo "<strong>".$vida_util_actual."</strong>";
+                        ?>
+                      </td>
+                      <?php
+                      }
+                    }
+                    ?>
+                    <!--  -->
+
+                    <?php
+                    if ((isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='administrador') or (isset($_SESSION["ses_id"]) and isset($_SESSION["privilegio"]) and $_SESSION["privilegio"]=='encargado'))
+                    {
+                    ?>
+                    <!--campo editar-->
+                  <td valign="middle" align="center" width="50">
+                        <a href="<?php echo Conectar::ruta();?>?accion=edit_activo&id_activo=<?php echo $activo[$i]["id_activo"];?>" title="Editar <?php echo $activo[$i]["nombre_activo"];?>"><img src="<?php echo Conectar::ruta();?>images/editar.png" border="0" width="32" height="32" /></a>
+                    </td>
+
+                    <!--Campo eliminar-->
+                    <td valign="middle" align="center" width="50">
+                        <a href="#" title="Eliminar <?php echo $activo[$i]["nombre_activo"];?> " onclick="eliminar('<?php echo Conectar::ruta();?>?accion=delete_activo&id_activo=<?php echo $activo[$i]["id_activo"];?>')"><img src="<?php echo Conectar::ruta();?>images/eliminar.png" border="0" width="32" height="32" /></a>
+                    </td>
+                    <?php } ?>
+                </tr>
+                <?php
+                }
+                ?>
+                </table>
+        <?php
+        }
+        ?>
+        </div><!--Fin class barra_deslizante_tabla-->
+        </div> <!--fin contenedor_tabla-->
+
+
+      </div>
+      <!-- footer -->
+      <div id="footer">
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+        <div class="cl">&nbsp;</div>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

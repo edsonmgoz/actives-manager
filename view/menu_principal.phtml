@@ -1,0 +1,17 @@
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>menu_source/styles.css" type="text/css" />
+</head>
+<body>
+  <div id='cssmenu'>
+  <ul>
+     <li><a href="<?php echo Conectar::ruta();?>?accion=index" title="Inicio"><span>Inicio</span></a></li>
+     <li><a href="<?php echo Conectar::ruta();?>?accion=demo_video" title="Demo video"><span>Demo video</span></a></li>
+     <li><a href="<?php echo Conectar::ruta();?>?accion=view_activo" title="Ver activos"><span>Ver activos</span></a></li>
+     <li><a href="<?php echo Conectar::ruta();?>?accion=view_ufv" title="Ver UFVs del año <?php echo date("Y"); ?>"><span>UFVs del año <?php echo date("Y") ?></span></a></li>
+     <li class='last'><a href="<?php echo Conectar::ruta();?>?accion=about" title="Acerca de"><span>Acerca de</span></a></li>
+  </ul>
+  </div>
+</body>
+</html>

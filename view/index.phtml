@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Actives Manager</title>
+  <link rel="shortcut icon" type="image/x-icon" href="<?php echo Conectar::ruta(); ?>images/favicon.ico" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/style.css" type="text/css" media="all" />
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>css/estilos.css" type="text/css" />
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery-1.8.0.min.js" type="text/javascript"></script>
+  <!--[if lt IE 9]>
+    <script src="js/modernizr.custom.js"></script>
+  <![endif]-->
+  <script src="<?php echo Conectar::ruta(); ?>js/funciones.js" type="text/javascript"></script>
+  <script src="<?php echo Conectar::ruta(); ?>js/jquery.carouFredSel-5.5.0-packed.js" type="text/javascript"></script>
+  <script src="<?php echo Conectar::ruta(); ?>js/functions.js" type="text/javascript"></script>
+</head>
+<body>
+<!-- wrapper -->
+<div id="wrapper">
+  <!-- shell -->
+  <div class="shell">
+    <!-- container -->
+    <div class="container">
+      <!-- header -->
+      <header id="header">
+        <h1 id="logo"><a href="<?php echo Conectar::ruta();?>">Active</a></h1>
+        <div id="sesion"><a href="<?php echo Conectar::ruta(); ?>?accion=logueo">Iniciar Sesión</a></div>
+      </header>
+      <!-- end of header -->
+      <audio src="<?php echo Conectar::ruta();?>audio/fondo.mp3"autoplay controls></audio>
+      <!-- navigaation -->
+      <nav id="navigation">
+        <?php include("menu_principal.phtml"); ?>
+      </nav>
+      <!-- end of navigation -->
+      <!-- slider-holder -->
+      <div class="slider-holder">
+        <?php
+        if(isset($_GET["m"]))
+        {
+            switch($_GET["m"])
+            {
+                case '3':
+                ?>
+                <h2 style="color:green;">Usted ha cerrado su sesión exitosamente </h2>
+                <?php
+                break;
+
+                case '4':
+                ?>
+                <h2 style="color:red;">Usted esta deshabilitado de ACTIVES MANAGER. </h2>
+                <?php
+                break;
+
+            }
+        }
+        ?>
+        <!-- slider -->
+        <div class="slider">
+          <div class="socials">
+            <a href="#" class="facebook-ico">facebook-ico</a>
+            <a href="#" class="twitter-ico">twitter-ico</a>
+            <a href="#" class="skype-ico">skype-ico</a>
+            <a href="#" class="rss-ico">rss-ico</a>
+            <div class="cl">&nbsp;</div>
+          </div>
+
+          <div class="arrs">
+            <a href="#" class="prev-arr"></a>
+            <a href="#" class="next-arr"></a>
+          </div>
+          <br><br><br>
+          <ul>
+            <li id="img1">
+              <div class="slide-cnt">
+                <h2>Resultados Inmediatos</h2>
+                <p>Con Actives Manager como su solución para control de activos <br> fijos,
+                  usted tendrá el acceso a la información de sus activos de <br> manera rápida
+                  br y eficiente. <a href="#"></a></p>
+              </div>
+              <br>
+              <img src="<?php echo Conectar::ruta(); ?>images/image_01.png" alt="" />
+            </li>
+
+            <li id="img2">
+              <div class="slide-cnt">
+                <h2>Su información al instante</h2>
+                <p>Su información estará protegida y resguardada por una base <br> de datos robusta y de gran capacidad disponible para sus <br> consultas.<a href="#"></a></p>
+              </div>
+              <br>
+              <img src="<?php echo Conectar::ruta(); ?>images/image_02.jpg" alt="" />
+            </li>
+
+            <li id="img3">
+              <div class="slide-cnt">
+                <h2>Productividad para su empresa</h2>
+                <p>La próxima vez que usted adquiera un bien para su negocio o empresa, solamente tendrá que agregar los datos del mismo al sistema y gestionarlo de manera fácil y consistente <a href="#"></a></p>
+              </div>
+              <img src="<?php echo Conectar::ruta(); ?>images/image_03.jpg" alt="" />
+            </li>
+
+          </ul>
+
+
+        <!-- end of slider -->
+
+        <!-- thumbs -->
+        <div id="thumbs-wrapper">
+          <div id="thumbs">
+            <a href="#img1" class="selected"><img src="<?php echo Conectar::ruta(); ?>images/image_01.png"/></a>
+            <a href="#img2"><img src="<?php echo Conectar::ruta(); ?>images/image_02.jpg" /></a>
+            <a href="#img3"><img src="<?php echo Conectar::ruta(); ?>images/image_03.jpg" /></a>
+
+          </div>
+          <a id="prev" href="#"></a>
+          <a id="next" href="#"></a>
+        </div>
+        <!-- end of thumbs -->
+      </div>
+
+
+      <!-- end of main -->
+
+      <!-- footer -->
+      <div id="footer">
+        <div class="footer-nav">
+           <ul>
+            <li><a href="<?php echo Conectar::ruta();?>?accion=index" title="Inicio"><span>Inicio</span></a></li>
+            <li><a href="<?php echo Conectar::ruta();?>?accion=demo_video" title="Demo video"><span>Demo video</span></a></li>
+            <li><a href="<?php echo Conectar::ruta();?>?accion=view_activo" title="Ver activos"><span>Ver activos</span></a></li>
+            <li><a href="<?php echo Conectar::ruta();?>?accion=about" title="Acerca de"><span>Acerca de</span></a></li>
+          </ul>
+        </div>
+        <p class="copy">&copy; Copyright 2014<span>|</span>Sistema de activos fijos <a href="<?php echo Conectar::ruta();?>" style="color:#FFFFFF">ACTIVES MANAGER</a></p>
+      </div>
+      <!-- end of footer -->
+    </div>
+    <!-- end of container -->
+  </div>
+  <!-- end of shell -->
+</div>
+<!-- end of wrapper -->
+</body>
+</html>

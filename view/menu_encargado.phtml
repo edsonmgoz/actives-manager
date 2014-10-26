@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title></title>
+  <link rel="stylesheet" href="<?php echo Conectar::ruta(); ?>menu_source/styles.css" type="text/css" />
+</head>
+<body>
+  <div id='cssmenu'>
+  <ul>
+     <li><a href="<?php echo Conectar::ruta();?>?accion=encargado" title="Inicio"><span>Inicio</span></a></li>
+     <li class='has-sub'><a href='#'><span>Mantenimiento</span></a>
+        <ul>
+           <li><a href="<?php echo Conectar::ruta();?>?accion=assign_maintenance" title="Asignar mantenimiento"><span>Asignar mantenimiento</span></a></li>
+           <li><a href="<?php echo Conectar::ruta();?>?accion=record_assignments" title="Registro de asignaciones"><span>Registro de asignaciones</span></a></li>
+        </ul>
+     </li>
+     <li class='has-sub'><a href="<?php echo Conectar::ruta();?>?accion=msg_alert" title="Mensajes de alerta"><span>Mensajes de alerta</span></a></li>
+     <li class='has-sub'><a href='#'><span>Activos</span></a>
+        <ul>
+           <li><a href='<?php echo Conectar::ruta();?>?accion=add_activo' title="Ingresar activo"><span>Ingresar activo</span></a></li>
+           <li class='last'><a href='<?php echo Conectar::ruta();?>?accion=view_activo' title="Registro de activos"><span>Registro de activos</span></a></li>
+        </ul>
+     </li>
+     <li><a href="<?php echo Conectar::ruta();?>?accion=view_ufv" title="Ver UFVs del año <?php echo date("Y"); ?>"><span>UFVs del año <?php echo date("Y") ?></span></a></li>
+     <li class='last'><a href="<?php echo Conectar::ruta();?>?accion=salir" title="Cerrar Sesi&oacute;n"><span>Cerrar Sesi&oacute;n</span></a></li>
+  </ul>
+  </div>
+</body>
+</html>
